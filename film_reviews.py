@@ -1,6 +1,10 @@
 def review(source, review, in_french=False):
     tokens = review.split(",")
-    if source == "filmsonline":
+    source = check_source(source)
+    if source > 3:
+        return "error"
+
+    if source == 1:
         review_score = int(tokens[2])
         if review_score > 50:
             if in_french:
@@ -13,7 +17,7 @@ def review(source, review, in_french=False):
         else:
             return "bad"
 
-    if source == "filmorama":
+    if source == 2:
         review_score_str = tokens[3]
         if review_score_str.isdigit():
             if int(review_score_str) > 2:
@@ -22,7 +26,7 @@ def review(source, review, in_french=False):
                 else:
                     return "good"
         else:
-            return "unknown"
+            return "error"
 
         if in_french:
             return "merde"
@@ -49,3 +53,13 @@ def review(source, review, in_french=False):
     else:
         return "bad"
 
+
+def check_source(source):
+    if source == "filmsonline":
+        return 1
+    elif source == "filmorama":
+        return 2
+    elif source == "rottenfruit":
+        return 3
+
+    return 99

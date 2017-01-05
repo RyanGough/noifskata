@@ -21,7 +21,7 @@ class TestFilmReviews(unittest.TestCase):
 
     def test_classify_filmorama_malformed(self):
         review = "robin hood - prince of thieves,ryan gough,best film ever obvs.,null"
-        self.assertEqual(film_reviews.review("filmorama", review), "unknown")
+        self.assertEqual(film_reviews.review("filmorama", review), "error")
 
     def test_classify_rottenfruit_good(self):
         review = "****,will hunt,i liked this film,transformers"
@@ -62,6 +62,10 @@ class TestFilmReviews(unittest.TestCase):
     def test_classify_rottenfruit_bad_in_french(self):
         review = "***,will hunt,i hated this film,transformers 2"
         self.assertEqual(film_reviews.review("rottenfruit", review, True), "merde")
+
+    def test_classify_unknown_source(self):
+        review = "A+,neal baker,damn good,the quiet man"
+        self.assertEqual(film_reviews.review("webfilms", review, True), "error")
 
 
 if __name__ == '__main__':
