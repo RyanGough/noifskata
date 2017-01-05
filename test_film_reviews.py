@@ -62,3 +62,7 @@ class TestFilmReviews(unittest.TestCase):
     def test_classify_rottenfruit_bad_in_french(self):
         review = "***,will hunt,i hated this film,transformers 2"
         self.assertEqual(film_reviews.review("rottenfruit", review, True), "merde")
+
+
+if __name__ == '__main__':
+    unittest.main()
